@@ -1,29 +1,26 @@
-# Smart-Energy-NILM-Web
 
-Tiny-ML powered DIY smart energy meter that **identifies which appliance
-just turned on** and streams live data to:
+# Smart Energy Meter with ESP32 & Machine Learning
 
-* **MQTT / Home-Assistant**
-* **Built-in ESP32 web dashboard** (Server-Sent Events)
+This project extends Giovanni Aggiustatutto's DIY energy meter by adding a
+machine‑learning classifier that learns the power signature of each appliance
+in your house.
 
-![dashboard screenshot](docs/dashboard.png)
+## Usage workflow
 
-## 🔧 Hardware
+1. **Flash the firmware** (`firmware/`) after editing `config.h`.
+2. **Collect data** into CSV `timestamp,voltage,current,power,appliance` while
+   switching appliances on/off.
+3. **Train** a model with `python ml/train_model.py ml/data/dataset.csv`.
+4. **Deploy** real‑time classifier (`ml/realtime_classifier.py`) on any machine
+   connected to the MQTT broker. The script publishes the recognised appliance
+   label which is displayed on the OLED and in Home Assistant.
 
-| Qty | Part | Notes |
-| --- | ---- | ----- |
-| 1 | **JSY-MK-194G** energy meter | Single-phase, Modbus-RTU UART |
-| 1 | **ESP32 DevKit** | Any module with 2 free UART pins |
-| 1 | 5 V isolated PSU | e.g. Meanwell APV-8-5 |
-
-Wiring: JSY TX→GPIO16, JSY RX→GPIO17, 3V3 & GND common.
-
-## 🚀 Flash
+## Python dependencies
 
 ```bash
-# clone & build
-git clone https://github.com/<you>/smart-energy-nilm-web.git
-cd smart-energy-nilm-web
-pio run -t upload          # flash firmware
-pio run -t uploadfs        # optional: assets → SPIFFS
-pio device monitor         # serial log
+pip install -r ml/requirements.txt
+```
+
+## License
+
+MIT
