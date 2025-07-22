@@ -1,14 +1,12 @@
 
 /**
  * Configuration parameters
- * Replace the placeholders with your actual network credentials
- * and MQTT broker settings before flashing.
  */
 #pragma once
 
 // Wi‑Fi credentials
-#define WIFI_SSID     "YOUR_WIFI_SSID"
-#define WIFI_PASSWORD "YOUR_WIFI_PASSWORD"
+#define WIFI_SSID     "WIFI_SSID"
+#define WIFI_PASSWORD "WIFI_PASSWORD"
 
 // MQTT broker
 #define MQTT_BROKER    "192.168.1.100"
